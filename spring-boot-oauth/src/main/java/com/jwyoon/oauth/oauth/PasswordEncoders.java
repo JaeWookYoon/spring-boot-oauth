@@ -1,6 +1,7 @@
 package com.jwyoon.oauth.oauth;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class PasswordEncoders implements PasswordEncoder {
 
 	@Override
 	public boolean matches(CharSequence rawPassword, String encodedPassword) {
-		if(rawPassword == null) {
+		if(Objects.isNull(rawPassword)) {
 			throw new PasswordNotMatchException("패스워드를 입력하세요.",null,HttpStatus.BAD_REQUEST);
 		}
 		System.out.println(rawPassword + " PASSWORD = " + encodedPassword);
