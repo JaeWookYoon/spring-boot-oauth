@@ -4,11 +4,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>spring-boot-web-spring-security</artifactId>
-	<packaging>jar</packaging>
-	<name>Spring Boot Web Spring Security</name>
-	<description>Spring Boot Web Spring Security Example</description>
-	<version>1.0</version>
+	<groupId>com.oauth</groupId>
+	<artifactId>test-oauth</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>test-1</name>
+	<description>Demo project for Spring Boot</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -17,10 +17,43 @@
 	</parent>
 
 	<properties>
-		<java.version>1.11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
+	<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.22</version>
+		    <scope>provided</scope>
+		</dependency>			
+		
+		<dependency>
+        <groupId>com.oracle.database.jdbc</groupId>
+        <artifactId>ojdbc10</artifactId>
+        <version>19.11.0.0</version>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.oracle.database.security</groupId>
+        <artifactId>oraclepki</artifactId>
+        <version>21.5.0.0</version>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.oracle.database.security</groupId>
+        <artifactId>osdt_cert</artifactId>
+        <version>21.5.0.0</version>
+        <scope>runtime</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.oracle.database.security</groupId>
+        <artifactId>osdt_core</artifactId>
+        <version>21.5.0.0</version>
+        <scope>runtime</scope>
+    </dependency>
+		
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
@@ -43,8 +76,7 @@
 			<groupId>com.lambdaworks</groupId>
 			<artifactId>scrypt</artifactId>
 			<version>1.4.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+		</dependency>		
 		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
 		<dependency>
 			<groupId>org.postgresql</groupId>

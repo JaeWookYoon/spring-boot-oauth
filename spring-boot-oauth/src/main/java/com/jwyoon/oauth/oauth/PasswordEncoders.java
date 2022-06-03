@@ -31,7 +31,7 @@ public class PasswordEncoders implements PasswordEncoder {
 	@Override
 	public boolean matches(CharSequence rawPassword, String encodedPassword) {
 		if(Objects.isNull(rawPassword)) {
-			throw new PasswordNotMatchException("패스워드를 입력하세요.",null,HttpStatus.BAD_REQUEST);
+			throw new PasswordNotMatchException("Input ur passwd.",null,HttpStatus.BAD_REQUEST);
 		}
 		System.out.println(rawPassword + " PASSWORD = " + encodedPassword);
 		boolean result = passwordEncoder.matches(rawPassword,encodedPassword);
