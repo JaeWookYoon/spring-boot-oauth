@@ -126,7 +126,7 @@ public class DefaultController {
         try {
 			  WebClient web = WebClient.create();
 			  result = web.post().
-			  uri("http://localhost:8080/oauth/token")
+			  uri("/oauth/token")
 			  .header(HttpHeaders.AUTHORIZATION, authHeader)
 			  //.header("Content-Type","application/x-www-form-urlencoded; charset=utf-8")
 			  .contentType(MediaType.APPLICATION_FORM_URLENCODED)

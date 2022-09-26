@@ -5,7 +5,7 @@ tomcat:
 
 spring:
   profiles:
-    active: release  
+    active: debug  
   redis:
     host: http://127.0.0.1
     port: 6379
@@ -16,7 +16,7 @@ spring:
     username: admin
     password: Rorlwlakfk18@
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@jakedbdb_high?TNS_ADMIN=C:/Users/iuh12/Downloads/wallet
+    url: jdbc:oracle:thin:@jakedbdb_high?TNS_ADMIN=./src/main/resources/wallet
     
   jpa: 
     show-sql: true
