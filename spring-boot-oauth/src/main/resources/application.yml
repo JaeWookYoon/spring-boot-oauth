@@ -47,7 +47,4 @@ spring:
 security: 
   oauth2:
     client:
-      auto-approve-scopes: ".*"
-    authorization:
-      token-key-access: isAuthenticated()
-      check-token-access: isAuthenticated()
+      auto-approve-scopes: ".*"    

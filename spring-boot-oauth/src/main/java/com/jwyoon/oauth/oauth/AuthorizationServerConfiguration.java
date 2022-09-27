@@ -79,10 +79,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Primary
     public DefaultTokenServices tokenService() {
         DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-        defaultTokenServices.setTokenStore(jdbcTokenStore());
-        defaultTokenServices.setAccessTokenValiditySeconds( 100 * 1);        
+        defaultTokenServices.setTokenStore(jdbcTokenStore());      
         defaultTokenServices.setSupportRefreshToken(true);
-        defaultTokenServices.setRefreshTokenValiditySeconds(100 *1 );
         defaultTokenServices.setClientDetailsService(clientDetailsService);
         
         return defaultTokenServices;
@@ -101,11 +99,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        // OAuth2 �씤利앹꽌踰�? �옄泥댁?�� 蹂댁�? �젙蹂�?�� �꽕�젙�븯�뒗 ?���遺�?
         security.tokenKeyAccess("permitAll()");        
         security.checkTokenAccess("permitAll()");
-        //security.allowFormAuthenticationForClients();
-        //security.addTokenEndpointAuthenticationFilter(new CustomTokenEndpointAuthenticationFilter(authenticationManager, oAuth2RequestFactory));
     }
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
