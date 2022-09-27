@@ -50,7 +50,7 @@ public class PasswordEncoders implements PasswordEncoder {
 		String bc = passwordEncoder.encode(b);
 		//System.out.println(passwordEncoder.encode(a));
 		System.out.println(passwordEncoder.encode(b));
-		System.out.println(passwordEncoder.matches(b, a));
+		System.out.println((bc.equals(a)));
 		byte[] encodedAuth = Base64.encodeBase64(s.getBytes(StandardCharsets.ISO_8859_1));
         String authHeader = "Basic " + new String(encodedAuth);
 		//System.out.println(passwordEncoder.encode(s));
