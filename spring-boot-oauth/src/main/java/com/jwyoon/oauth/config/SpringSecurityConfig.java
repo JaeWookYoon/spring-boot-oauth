@@ -22,46 +22,15 @@ import com.jwyoon.oauth.oauth.PasswordEncoders;
 import com.jwyoon.oauth.service.UserDetailServiceImpl;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired 
-	private UserDetailServiceImpl userDetailsService;
-    @Autowired
-    private AccessDeniedHandler accessDeniedHandler;
-    @Autowired
-    private PasswordEncoders passwordEncoders;
-    @Autowired
-    private LoginSuccessHander loginSuccessHandler;    
-    // roles admin allow to access /admin/**
-    // roles user allow to access /user/**
-    // custom 403 access denied handler
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-    	
-        http	.csrf().disable()
-        		.headers().frameOptions().disable()
-        		.and()
-                .authorizeRequests()
-                .antMatchers("/home", "/about","/callback","/request").permitAll()
-                .antMatchers("/oauth/token").permitAll()
-                //.antMatchers("/oauth/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
-                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("/user/**").hasAnyRole("USER")                 
-                .anyRequest().authenticated()
-                .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-    }
+	
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-    //AuthenticationManager Initiated
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {    	
-    	auth.parentAuthenticationManager(authenticationManagerBean()).userDetailsService(userDetailsService)
-    	.passwordEncoder(passwordEncoders);    	
-    }
+    
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         List<String> allowOrigin = new ArrayList<>();
@@ -75,12 +44,4 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-    //Spring Boot configured this already.
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web        
-        .ignoring()
-                .antMatchers("/resources/**", "/static/**", "*/css/**", "/js/**", "/images/**,webjars/**");
-    }
-
 }
