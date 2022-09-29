@@ -37,9 +37,8 @@ local.properties
 .buildpath
 
 # sbteclipse plugin
-.target
-target/*
-*/target/
+.target/
+
 # Tern plugin
 .tern-project
 
@@ -117,6 +116,9 @@ $RECYCLE.BIN/
 *.msix
 *.msm
 *.msp
+
+#target
+target/
 
 #DB files
 wallet/

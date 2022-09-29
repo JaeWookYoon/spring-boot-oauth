@@ -10,7 +10,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.web.cors.CorsConfiguration;
@@ -25,12 +24,41 @@ import com.jwyoon.oauth.service.UserDetailServiceImpl;
 //@EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	@Autowired 
+	private UserDetailServiceImpl userDetailsService;
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
+    @Autowired
+    private PasswordEncoders passwordEncoders;
+    @Autowired
+    private LoginSuccessHander loginSuccessHandler;    
+    // roles admin allow to access /admin/**
+    // roles user allow to access /user/**
+    // custom 403 access denied handler
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+    	
+        http	.csrf().disable()
+        		.headers().frameOptions().disable()        		
+        		.and()
+                .authorizeRequests()                               
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().disable()
+                .httpBasic().disable()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+    }
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-    
+    //AuthenticationManager Initiated
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {    	
+    	auth.parentAuthenticationManager(authenticationManagerBean()).userDetailsService(userDetailsService)
+    	.passwordEncoder(passwordEncoders);    	
+    }
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         List<String> allowOrigin = new ArrayList<>();
@@ -43,5 +71,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+    //Spring Boot configured this already.
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web        
+        .ignoring()
+                .antMatchers("/resources/**", "/static/**", "*/css/**", "/js/**", "/images/**,webjars/**");
     }
 }
